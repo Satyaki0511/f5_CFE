@@ -16,7 +16,8 @@ curl -su admin: -X GET http://localhost:8100/mgmt/shared/cloud-failover/declare 
 
 6>	vim cfe.json
 
->> add the Configuration 
+>> add the Configuration
+>> open CFE.json
 
 7>	Run this command 
 curl -su admin: -X POST -d @cfe.json http://localhost:8100/mgmt/shared/cloud-failover/declare | jq .
