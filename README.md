@@ -17,43 +17,6 @@ curl -su admin: -X GET http://localhost:8100/mgmt/shared/cloud-failover/declare 
 6>	vim cfe.json
 
 >> add the Configuration 
-{
-  "class": "Cloud_Failover",
-  "environment": "aws",
-  "controls": {
-    "class": "Controls",
-    "logLevel": "silly"
-  },
-  "externalStorage": {
-    "scopingTags": {
-      "f5_cloud_failover_label": "      ## S3 bucket tag 
-    }
-  },
-  "failoverAddresses": {
-    "enabled": true,
-    "scopingTags": {
-      "f5_cloud_failover_label": "f5"          ## 
-    }
-  },
-  "failoverRoutes": {
-    "enabled": true,
-    "scopingTags": {
-      "f5_cloud_failover_label": "f5"            ## add routing tag of aws 
-    },
-    "scopingAddressRanges": [
-      {
-        "range": "10.120.17.64/26",               ## Subnet of floating ip  
-        "nextHopAddresses": {
-                        "discoveryType": "static",
-                        "items": [
-                            "10.120.11.17",       ## Self ip
-                            "10.120.15.5"         ## Self ip 
-                        ]
-                    }
-      }
-    ]
-  }
-}
 
 7>	Run this command 
 curl -su admin: -X POST -d @cfe.json http://localhost:8100/mgmt/shared/cloud-failover/declare | jq .
